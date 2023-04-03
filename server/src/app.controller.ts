@@ -14,6 +14,6 @@ export class AppController {
 
   @Post()
   async processCalculation(@Body() initialData: InitialDataDto) {
-    await this.appService.processCalculation(initialData);
+    return this.appService.processCalculation(initialData);
   }
 }
