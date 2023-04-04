@@ -1,7 +1,15 @@
-import * as tf from '@tensorflow/tfjs';
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Res,
+  StreamableFile,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { InitialDataDto } from './dto/initialData.dto';
+import * as fs from 'fs-extra';
+import { path } from 'app-root-path';
 
 @Controller()
 export class AppController {
@@ -15,5 +23,12 @@ export class AppController {
   @Post()
   async processCalculation(@Body() initialData: InitialDataDto) {
     return this.appService.processCalculation(initialData);
+  }
+
+  @Get('model')
+  getModel() {
+    const modelPath = `${path}/src/model/model.json`;
+    const modelJSON = fs.createReadStream(modelPath);
+    return new StreamableFile(modelJSON);
   }
 }
