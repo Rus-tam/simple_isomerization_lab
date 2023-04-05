@@ -12,7 +12,7 @@ export class AppService {
     const model = await tf.loadLayersModel(
       'https://raw.githubusercontent.com/Rus-tam/simple_isomerization_lab/main/server/src/model/model.json',
     );
-    // const model = await tf.loadLayersModel('http://localhost:3000/model');
+
     const input = tf.tensor([
       parseFloat(initialData.vessel_volume),
       parseFloat(initialData.feed_temperature),
